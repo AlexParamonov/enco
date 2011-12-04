@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Alexander Paramonov"]
   s.email       = ["alexander.n.paramonov@gmail.com"]
   s.homepage    = "http://github.com/AlexParamonov/enco"
-  s.summary     = %q{Push related objects to a queue for delayed save}
-  s.description = %q{Enco allows to push related objects to an object's queue for delayed save, that will triggered on object#save. In this case object wil store all related information on its save.}
+  s.summary     = %q{Nice utf8 converter}
+  s.description = %q{Enco will convert any string to utf-8.}
 
   s.rubyforge_project = "enco"
 

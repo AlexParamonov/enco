@@ -1,10 +1,14 @@
 require 'rchardet19'
 
+# Enco will convert any string to utf-8
+# Just call Enco.to_utf8 any_string
+# It will return non string objects back: Enco.to_utf8(not_a_string) === not_a_string
 module Enco
   # @param [String] string
   # @param [Hash] options
   # @option options [Boolean] :ignore_frozen
   def self.to_utf8 string, options = {}
+    return string unless string.is_a? String
     if string.frozen?
       return string if true == options[:ignore_frozen]
       string = string.dup
