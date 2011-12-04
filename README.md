@@ -47,7 +47,6 @@ tested with Ruby
 
 * 1.9.2
 * 1.9.3
-* jruby
 * ruby-head
 
 see [build history](http://travis-ci.org/#!/AlexParamonov/enco/builds)
