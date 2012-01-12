@@ -1,6 +1,6 @@
 Enco
 ==========
-Enco will convert any string to utf-8
+Enco will convert any string to utf-8, based on original string encoding.
 
 Installation
 ------------
@@ -12,27 +12,29 @@ It is simple. Just call
 
     my_utf8_string = Enco.to_utf8 any_string
 
-It will return non string objects back:
+If you pass something other, than a string, it'll return non string objects back:
 
-    Enco.to_utf8(not_a_string) === not_a_string
+    Enco.to_utf8(not_a_string) === not_a_string # true
 
-works correctly with frozen strings. If you dont want to convert frozen string, pass :ignore_frozen => true and Enco
-will ignore that string:
+Enco may handle frozen strings.
+If you'll pass frozen string to it, it'll return utf8 analog, but not frozen.
+If you dont want to convert frozen string, pass :ignore_frozen => true and Enco will ignore that string:
 
-    Enco.to_utf8 any_string.frozen, :ignore_frozen => true # returns frozen string
-    Enco.to_utf8 any_string.frozen                         # returns dup of any_string, converted to utf-8
+    frozen_string = "hi there!".frozen
+    Enco.to_utf8 frozen_string, :ignore_frozen => true # returns frozen_string
+    Enco.to_utf8 frozen_string                         # returns dup of frozen_string, converted to utf-8
 
 ### Plugins
 Add
 
     require 'enco/string_to_utf8'
 
-end you'll get
+and you'll get
 
-    "any string".to_utf8
-method that accept same options as
+    "hi there!".to_utf8
+This method accepts same options as
 
-    Enco.to_utf8 "any string"
+    Enco.to_utf8 "hi there!"
 
 
 Requirements
