@@ -56,5 +56,5 @@ see [contributing guide](http://github.com/AlexParamonov/enco/blob/master/CONTRI
 
 Copyright
 ---------
-Copyright © 2011 Alexander N Paramonov.
+Copyright © 2011-2012 Alexander N Paramonov.
 Released under the MIT License. See the LICENSE file for further details.
