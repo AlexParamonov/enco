@@ -6,15 +6,9 @@ require 'rchardet19'
 module Enco
   # @param [String] string
   # @param [Hash] options
-  # @option options [Boolean] :ignore_frozen
   def self.to_utf8(string, options = {})
     return string unless string.is_a? String
-
-    # frozen strings handling
-    if string.frozen?
-      return string if true == options[:ignore_frozen]
-      string = string.dup
-    end
+    string = string.dup
 
     cd = ::CharDet.detect(string, :silent => true)
 

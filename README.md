@@ -16,23 +16,20 @@ If you pass something other, than a string, it'll return non string objects back
 
     Enco.to_utf8(not_a_string) === not_a_string # true
 
-Enco may handle frozen strings.
-If you'll pass frozen string to it, it'll return utf8 analog, but not frozen.
-If you dont want to convert frozen string, pass :ignore_frozen => true and Enco will ignore that string:
+Enco does not touch input string, so you may pass frozen strings to it and it'll handle them correctly.
 
     frozen_string = "hi there!".frozen
-    Enco.to_utf8 frozen_string, :ignore_frozen => true # returns frozen_string
-    Enco.to_utf8 frozen_string                         # returns dup of frozen_string, converted to utf-8
+    Enco.to_utf8 frozen_string         # utf-8 analog of frozen_string
 
 ### Plugins
 Add
 
     require 'enco/string_to_utf8'
 
-and you'll get
+and you'll get #to_utf-8 method on String objects:
 
     "hi there!".to_utf8
-This method accepts same options as
+It delegates to Enco.to_utf8 and accepts same options as
 
     Enco.to_utf8 "hi there!"
 

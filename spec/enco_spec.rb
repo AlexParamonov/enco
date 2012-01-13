@@ -3,12 +3,24 @@ require "spec_helper"
 
 # TODO add more Test cases
 describe Enco do
-  before(:each) do
-    @simple_string   = %Q{test string\nin }
-    @cyrillic_string = %Q{тестовая строка\nin }
+  it "should not touch input string" do
+    test_string = "test string".force_encoding "ISO-8859-15"
+    saved  = test_string
+    result = Enco.to_utf8 test_string
+
+    test_string.encoding.to_s.should == "ISO-8859-15"
+    result.encoding.to_s.should == "UTF-8"
+
+    test_string.should === saved
   end
+
   describe "#to_utf8" do
     describe "argument is" do
+      before(:each) do
+        @simple_string   = %Q{test string\nin }
+        @cyrillic_string = %Q{тестовая строка\nin }
+      end
+      
       context "a string in" do
         specify "UTF-8 encoding" do
           result = Enco.to_utf8(string_in 'UTF-8')
@@ -44,25 +56,12 @@ describe Enco do
       context "a frozen string" do
         before(:each) do
           @test_string = "test string".force_encoding "ISO-8859-15"
+          @test_string.freeze
         end
 
         it "should perform conversion" do
-          result = Enco.to_utf8 @test_string.freeze
+          result = Enco.to_utf8 @test_string
           result.encoding.to_s.should == "UTF-8"
-        end
-
-        it "should not change input string" do
-          Enco.to_utf8 @test_string.freeze
-
-          @test_string.encoding.to_s.should == "ISO-8859-15"
-        end
-
-        context "ignore_frozen flag set to true" do
-          it "should return string itself" do
-            result = Enco.to_utf8 @test_string.freeze, :ignore_frozen => true
-            result.should eq @test_string
-            result.encoding.to_s.should == "ISO-8859-15"
-          end
         end
       end
 
@@ -80,7 +79,6 @@ describe Enco do
           end
         end
       end
-
     end
   end
 end
