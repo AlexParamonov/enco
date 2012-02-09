@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.email       = ["alexander.n.paramonov@gmail.com"]
   s.homepage    = "http://github.com/AlexParamonov/enco"
   s.summary     = %q{Enco will convert any string to utf-8, based on original string encoding.}
-  s.description = %q{Convert any string to utf-8 never was so simple as with Enco!}
+  s.description = %q{Enco can convert any string to utf-8, based on it original encoding. 
+Converting string to utf-8 never was so simple as with Enco!}
 
   s.rubyforge_project = "enco"
 

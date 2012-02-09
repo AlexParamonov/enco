@@ -1,5 +1,8 @@
 Enco
 ==========
+[![Build Status](https://secure.travis-ci.org/AlexParamonov/enco.png)](http://travis-ci.org/AlexParamonov/enco)
+[![Gemnasium Build Status](https://gemnasium.com/AlexParamonov/enco.png)](http://gemnasium.com/AlexParamonov/enco)  
+
 Enco will convert any string to utf-8, based on original string encoding.
 
 Installation
