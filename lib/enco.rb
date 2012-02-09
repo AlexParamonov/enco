@@ -1,4 +1,4 @@
-require 'rchardet19'
+require 'charlock_holmes'
 
 # Enco will convert any string to utf-8
 # Just call Enco.to_utf8 any_string
@@ -10,10 +10,10 @@ module Enco
     return string unless string.is_a? String
     string = string.dup
 
-    cd = ::CharDet.detect(string, :silent => true)
+    cd = detector.detect(string)
 
-    if cd.confidence > 0.5 then
-      string.encode('utf-8', cd.encoding, :invalid => :replace)
+    if cd.fetch(:confidence) > 0.5 then
+      string.encode('utf-8', cd.fetch(:encoding), :invalid => :replace)
     else
       force_to_utf8 string
     end
@@ -24,5 +24,9 @@ module Enco
     require 'iconv'
     ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
     ic.iconv(string + ' ')[0..-2]
+  end
+
+  def self.detector
+    @detector ||= CharlockHolmes::EncodingDetector.new
   end
 end
