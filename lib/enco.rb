@@ -1,4 +1,5 @@
-require 'charlock_holmes'
+require 'enco/detectors/char_det_detector'
+require 'enco/detectors/charlock_holmes_detector'
 
 # Enco will convert any string to utf-8
 # Just call Enco.to_utf8 any_string
@@ -10,13 +11,21 @@ module Enco
     return string unless string.is_a? String
     string = string.dup
 
-    cd = detector.detect(string)
-
-    if cd.fetch(:confidence) > 0.5 then
-      string.encode('utf-8', cd.fetch(:encoding), :invalid => :replace)
-    else
-      force_to_utf8 string
+    detectors.each do |detector|
+      cd = detector.detect(string)
+      # TODO add logger
+      #puts (string)
+      #puts (detector.inspect)
+      #puts (cd.encoding)
+      #puts (cd.confidence)
+      if cd.confidence > 0.5 then
+        return string.encode('utf-8', cd.encoding, :invalid => :replace)
+      else
+        next
+      end
     end
+
+    force_to_utf8 string
   end
 
   private
@@ -26,7 +35,11 @@ module Enco
     ic.iconv(string + ' ')[0..-2]
   end
 
-  def self.detector
-    @detector ||= CharlockHolmes::EncodingDetector.new
+  def self.detectors
+    [CharlockHolmesDetector, CharDetDetector]
   end
+
+  #def self.detector
+  #  @detector ||= CharlockHolmes::EncodingDetector.new
+  #end
 end
