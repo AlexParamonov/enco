@@ -46,8 +46,9 @@ tested with Ruby
 
 * 1.9.2
 * 1.9.3
-* ruby-head
 * jruby-19mode
+* rbx-19mode
+* ruby-head
 
 see [build history](http://travis-ci.org/#!/AlexParamonov/enco/builds)
 
